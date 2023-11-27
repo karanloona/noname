@@ -3,6 +3,7 @@ import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 import { AddCategoryDTO } from "./category.dto";
 import { API_BEARER_AUTH_NAME, JwtAuthGaurd } from "src/gaurds/jwt-auth.gaurd";
 import { CategoryService } from "./category.service";
+import { Request } from 'express';
 
 @ApiTags('category')
 @Controller('category')

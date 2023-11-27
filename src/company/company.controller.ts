@@ -4,6 +4,7 @@ import { API_BEARER_AUTH_NAME, JwtAuthGaurd } from "src/gaurds/jwt-auth.gaurd";
 import { CreateCompanyDTO, UpdateCompanyDTO } from "./company.dto";
 import { CompanyService } from "./company.service";
 import { CheckUser } from "src/auth/auth.dto";
+import { Request } from 'express';
 
 @ApiTags('company')
 @Controller('company')

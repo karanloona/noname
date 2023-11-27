@@ -4,6 +4,7 @@ import { FilesService } from "./files.service";
 import { ApiBearerAuth, ApiBody, ApiConsumes, ApiTags } from "@nestjs/swagger";
 import { API_BEARER_AUTH_NAME, JwtAuthGaurd } from "src/gaurds/jwt-auth.gaurd";
 import { FileFieldsInterceptor, FileInterceptor } from "@nestjs/platform-express";
+import { Request } from 'express';
 
 @ApiTags('files')
 @UseGuards(JwtAuthGaurd)

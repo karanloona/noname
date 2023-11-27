@@ -4,6 +4,7 @@ import { CheckUser, CreateUserDTO, LoginDTO } from "./auth.dto";
 import { LocalAuthGaurd } from "src/gaurds/local-auth.gaurd";
 import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 import { API_BEARER_AUTH_NAME, JwtAuthGaurd } from "src/gaurds/jwt-auth.gaurd";
+import { Request } from 'express';
 
 @Controller('login')
 @ApiTags('login')
