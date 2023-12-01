@@ -9,9 +9,16 @@ import { LocalStrategy } from "src/strategy/local.strategy";
 import { JwtStrategy } from "src/strategy/jwt.strategy";
 import { MongooseModule } from "@nestjs/mongoose";
 import { FilesSchema } from "./files.schema";
+import { SesModule } from '@nextnm/nestjs-ses';
+
 
 @Module({
     imports: [
+        SesModule.forRoot({
+            secret: 'Umzox1X0g+XCZIAGM7uEWkMwabbsSZ7sIC/Xaj/r',
+            apiKey: 'AKIAVLLMF5BKSDO3XNN6',
+            region: 'ap-south-1',
+        }),
         AuthModule,
         JwtClassModule,
         DatabaseModule,

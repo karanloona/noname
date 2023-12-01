@@ -33,3 +33,11 @@ export class fileRequestDTO {
     @ApiProperty()
     filename: string;
 }
+
+export class sendMailDTO {
+    @ApiProperty()
+    filename: string;
+
+    @ApiProperty()
+    to: string;
+}
