@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Post, Req, UnauthorizedException, UploadedFile, UploadedFiles, UseGuards, UseInterceptors } from "@nestjs/common";
-import { CreateFolderDTO, UpdateFolderDTO, deleteFileFromFolderDTO, fileRequestDTO, sendMailDTO } from "./files.dto";
+import { CreateFolderDTO, UpdateFolderDTO, contactDTO, deleteFileFromFolderDTO, fileRequestDTO, sendMailDTO } from "./files.dto";
 import { FilesService } from "./files.service";
 import { ApiBearerAuth, ApiBody, ApiConsumes, ApiTags } from "@nestjs/swagger";
 import { API_BEARER_AUTH_NAME, JwtAuthGaurd } from "src/gaurds/jwt-auth.gaurd";
@@ -101,5 +101,10 @@ export class FilesController {
   @Post('send-email')
   async sendEmail(@Body() dto: sendMailDTO) {
     return await this.filesService.sendEmail(dto);
+  }
+
+  @Post('contact')
+  async contact(@Body() dto: contactDTO) {
+    return await this.filesService.contact(dto);
   }
 }

@@ -10,6 +10,7 @@ import { JwtStrategy } from "src/strategy/jwt.strategy";
 import { MongooseModule } from "@nestjs/mongoose";
 import { FilesSchema } from "./files.schema";
 import { SesModule } from '@nextnm/nestjs-ses';
+import { ContactSchema } from "./contact.schema";
 
 
 @Module({
@@ -22,7 +23,7 @@ import { SesModule } from '@nextnm/nestjs-ses';
         AuthModule,
         JwtClassModule,
         DatabaseModule,
-        MongooseModule.forFeature([{ name: 'Files', schema: FilesSchema }]),
+        MongooseModule.forFeature([{ name: 'Files', schema: FilesSchema }, {name: 'Contact', schema: ContactSchema}]),
     ],
     controllers: [FilesController],
     providers: [FilesService, FilesDao, LocalStrategy, JwtStrategy]

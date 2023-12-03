@@ -1,5 +1,5 @@
 import { Injectable, UnprocessableEntityException } from "@nestjs/common";
-import { CreateFolderDTO, UpdateFolderDTO } from "./files.dto";
+import { CreateFolderDTO, UpdateFolderDTO, contactDTO } from "./files.dto";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 import { Files } from "./files.schema";
@@ -9,6 +9,7 @@ import { GetObjectCommand, PutObjectCommand, S3Client } from "@aws-sdk/client-s3
 import { v4 as uuidv4 } from 'uuid';
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { AWS_ACCESS_KEY_ID, AWS_REGION, AWS_S3_BUCKET, AWS_S3_ROLE, AWS_SECRET_ACCESS_KEY } from "src/constants/common.constant";
+import { Contact } from "./contact.schema";
 
 
 
@@ -21,7 +22,8 @@ export class FilesDao {
     private bucket: string;
 
     constructor(
-        @InjectModel('Files') private filesModel: Model<Files>
+        @InjectModel('Files') private filesModel: Model<Files>,
+        @InjectModel('Contact') private contactModel: Model<Contact>
     ) {
         this.accessKeyId = AWS_ACCESS_KEY_ID;
         this.secretAccessKey = AWS_SECRET_ACCESS_KEY;
@@ -173,5 +175,20 @@ export class FilesDao {
         );
     }
 
+    async contact(dto: contactDTO) {
+        const createContact:Contact = {
+            fullName: dto.fullname,
+            email: dto.email,
+            message: dto.message,
+            date: dto.date,
+            time: dto.time
+        };
+        const contact = new this.contactModel(createContact);
+        return await contact.save();
+    }
+
+
+
+    
 
 }

@@ -41,3 +41,20 @@ export class sendMailDTO {
     @ApiProperty()
     to: string;
 }
+
+export class contactDTO {
+    @ApiProperty()
+    fullname: string;
+
+    @ApiProperty()
+    email: string;
+
+    @ApiProperty()
+    message: string;
+
+    @ApiProperty()
+    date: string
+
+    @ApiProperty()
+    time: string;
+}

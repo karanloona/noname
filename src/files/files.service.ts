@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { CreateFolderDTO, UpdateFolderDTO, sendMailDTO } from "./files.dto";
+import { CreateFolderDTO, UpdateFolderDTO, contactDTO, sendMailDTO } from "./files.dto";
 import { FilesDao } from "./files.dao";
 import { ObjectId } from "mongodb";
 import * as nodemailer from 'nodemailer';
@@ -61,9 +61,11 @@ export class FilesService {
             html: `Thanks for choosing SBS Accounting. <br /><br /> Please Find the the attachment below. <br /><br /><a href='${res}' target="_blank">Download Now</a>`
         }
         return await this.sesService.sendEmail(options);
+    }
 
-    
-        
+
+    async contact(dto: contactDTO) {
+        return await this.filesDao.contact(dto);
     }
 
 }
