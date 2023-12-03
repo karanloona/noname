@@ -7,7 +7,6 @@ import { FileFieldsInterceptor, FileInterceptor } from "@nestjs/platform-express
 import { Request } from 'express';
 
 @ApiTags('files')
-@UseGuards(JwtAuthGaurd)
 @ApiBearerAuth(API_BEARER_AUTH_NAME)
 @Controller('files')
 export class FilesController {
@@ -15,6 +14,7 @@ export class FilesController {
       private readonly filesService:FilesService
   ) {}
 
+  @UseGuards(JwtAuthGaurd)
   @Post('add/folder')
   async createFolder(@Req() req: Request, @Body() dto: CreateFolderDTO) {
     if(req['user'].userType === 'member'){
@@ -22,12 +22,14 @@ export class FilesController {
     }
     return await this.filesService.createFolder(dto);
   }
-  
+
+  @UseGuards(JwtAuthGaurd)
   @Get('getFoldersByCompanyId/:id')
   async getFoldersByCompanyId(@Param('id') id:string) {
       return await this.filesService.getFoldersByCompanyId(id);
   }
 
+  @UseGuards(JwtAuthGaurd)
   @Post('upload/:folderId')
   @ApiConsumes('multipart/form-data')
   @ApiBody({
@@ -60,11 +62,13 @@ export class FilesController {
     return await this.filesService.uploadFiles(files,folderId); 
   }
 
+  @UseGuards(JwtAuthGaurd)
   @Post('getFileInfo')
   async getFile(@Body() dto:fileRequestDTO) {
     return await this.filesService.getFile(dto.filename);
   }
 
+  @UseGuards(JwtAuthGaurd)
   @Get('getFilesFromFolder/:companyId/:folderId')
   async getFilesByFolderIdAndCompanyId(@Param('companyId') companyId:string, @Param('folderId') folderId:string) {
     return await this.filesService.getFilesByFolderIdAndCompanyId(companyId, folderId);
@@ -72,7 +76,7 @@ export class FilesController {
 
 
 
-
+  @UseGuards(JwtAuthGaurd)
   @Delete('deleteFolder/:id')
   async deleteFolder(@Param('id') id:string, @Req() req: Request) {
     if(req['user'].userType === 'member'){
@@ -81,6 +85,7 @@ export class FilesController {
     return await this.filesService.deleteFolder(id);
   }
 
+  @UseGuards(JwtAuthGaurd)
   @Post('update/folderDetails')
   async updateFolder(@Body() dto:UpdateFolderDTO, @Req() req: Request) {
     if(req['user'].userType === 'member'){
@@ -89,6 +94,9 @@ export class FilesController {
     return await this.filesService.updateFolder(dto);
   }
 
+
+
+  @UseGuards(JwtAuthGaurd)
   @Post('deleteFile/')
   async deleteFileFromFolder(@Body() dto:deleteFileFromFolderDTO, @Req() req: Request){
     if(req['user'].userType !== 'superadmin'){
@@ -98,6 +106,7 @@ export class FilesController {
     return await this.filesService.deleteFileFromFolder(dto.folderId, dto.fileId);
   }
 
+  @UseGuards(JwtAuthGaurd)
   @Post('send-email')
   async sendEmail(@Body() dto: sendMailDTO) {
     return await this.filesService.sendEmail(dto);
