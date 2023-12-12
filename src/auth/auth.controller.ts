@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Post, Req, UseGuards } from "@nestjs/common";
 import { AuthService } from "./auth.service";
-import { CheckUser, CreateUserDTO, LoginDTO } from "./auth.dto";
+import { CheckUser, CreateUserDTO, LoginDTO, PasswordDTO } from "./auth.dto";
 import { LocalAuthGaurd } from "src/gaurds/local-auth.gaurd";
 import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 import { API_BEARER_AUTH_NAME, JwtAuthGaurd } from "src/gaurds/jwt-auth.gaurd";
@@ -27,5 +27,12 @@ export class AuthController {
     @Get('test')
     async test(@Req() req: Request){
         return 'test';
+    }
+
+    @UseGuards(JwtAuthGaurd)
+    @ApiBearerAuth(API_BEARER_AUTH_NAME)
+    @Post('change/password')
+    async changePassword(@Body() dto:PasswordDTO) {
+        return await this.authService.changePassword(dto);
     }
 }

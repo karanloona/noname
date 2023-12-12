@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
-import { CreateUserDTO, LoginDTO } from "./auth.dto";
+import { CreateUserDTO, LoginDTO, PasswordDTO } from "./auth.dto";
 import { AuthDao } from "./auth.dao";
 import { JwtService } from '@nestjs/jwt';
 
@@ -28,5 +28,9 @@ export class AuthService {
                 access_token: this.jwtService.sign(res),
             };
         }
+    }
+
+    async changePassword(dto: PasswordDTO) {
+        return await this.authDao.changePassword(dto);
     }
 }

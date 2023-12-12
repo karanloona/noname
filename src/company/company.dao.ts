@@ -30,30 +30,31 @@ export class CompanyDao {
 
     async getCompanyDetailById(companyId:ObjectId){
         return await this.companyModel.aggregate([
-            {
-              $match: {
-                _id: companyId
-              },
+          {
+            $match: {
+              _id: companyId
             },
-            {
-              $lookup: {
-                from: 'categories',
-                localField: 'categoryId',
-                foreignField: '_id',
-                as: 'category'
-              }
-            },
-            {
-              $project: {
-                _id: 0,
-                name: 1,
-                city: 1,
-                categoryId: 1,
-                'category.name': 1
-              }
+          },
+          {
+            $lookup: {
+              from: 'categories',
+              localField: 'categoryId',
+              foreignField: '_id',
+              as: 'category'
             }
-            
-        ]).exec();
+          },
+          {
+            $project: {
+              _id: 0,
+              name: 1,
+              city: 1,
+              categoryId: 1,
+              userId: 1,
+              'category.name': 1
+            }
+          }
+          
+      ]).exec();
     }
 
     async deleteCompanyById(companyId:ObjectId){

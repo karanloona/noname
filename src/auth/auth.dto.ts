@@ -26,3 +26,11 @@ export class CheckUser {
     @ApiProperty()
     userId: string;
 }
+
+export class PasswordDTO {
+    @ApiProperty({example: "654740ef2c0e2dfff276de16"})
+    userId: string;
+
+    @ApiProperty({example: "superadmin"})
+    password: string;
+}

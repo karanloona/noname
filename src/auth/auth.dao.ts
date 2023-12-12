@@ -1,17 +1,18 @@
 import { InjectModel } from "@nestjs/mongoose";
 import { Users } from "./users.schema";
 import { Model } from "mongoose";
-import { CreateUserDTO, LoginDTO } from "./auth.dto";
+import { CreateUserDTO, LoginDTO, PasswordDTO } from "./auth.dto";
 import * as bcrypt from 'bcrypt';
 import { NotFoundException } from "@nestjs/common";
+import { ObjectId } from "mongodb";
 
 
 export class AuthDao {
+    private readonly saltOrRounds = 10;
     constructor(@InjectModel('User') private userModel: Model<Users>) {}
 
     async createUser(dto:CreateUserDTO) {
-        const saltOrRounds = 10;
-        const hash = await bcrypt.hash(dto.password, saltOrRounds);
+        const hash = await bcrypt.hash(dto.password, this.saltOrRounds);
         const user = new this.userModel({ username: dto.username, password: hash, userType: dto.userType });
         return await user.save();
     }
@@ -57,6 +58,16 @@ export class AuthDao {
         }
         
         return user[0];
+    }
+
+    async changePassword(dto: PasswordDTO) {
+        const user = await this.userModel.findOne({ _id: new ObjectId(dto.userId) });
+        if (!user) {
+            // Handle user not found
+            return { message: 'wrong username' };
+        }
+        const hash = await bcrypt.hash(dto.password, this.saltOrRounds);
+        return await this.userModel.updateOne({ _id: new ObjectId(dto.userId) }, {password: hash})
     }
     
 }
