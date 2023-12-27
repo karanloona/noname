@@ -29,8 +29,8 @@ export class CompanyService {
         return await this.companyDao.getCompanyDetailById(new ObjectId(companyId));
     }
 
-    async deleteCompanyById(companyId:string) {
-        return await this.companyDao.deleteCompanyById(new ObjectId(companyId));
+    async deleteCompanyById(companyId:string, userId: string) {
+        return await this.companyDao.deleteCompanyById(new ObjectId(companyId), new ObjectId(userId));
     }
     
     async updateCompanyById(companyId:string, dto:UpdateCompanyDTO) {

@@ -9,6 +9,7 @@ import { MongooseModule } from "@nestjs/mongoose";
 import { JwtStrategy } from "src/strategy/jwt.strategy";
 import { LocalStrategy } from "src/strategy/local.strategy";
 import { CompanySchema } from "./company.schema";
+import { UsersSchema } from "src/auth/users.schema";
 
 @Module({
     imports: [
@@ -16,6 +17,8 @@ import { CompanySchema } from "./company.schema";
         JwtClassModule,
         DatabaseModule,
         MongooseModule.forFeature([{ name: 'Company', schema: CompanySchema }]),
+        MongooseModule.forFeature([{ name: 'User', schema: UsersSchema }]),
+        
     ],
     controllers: [CompanyController],
     providers: [CompanyService, CompanyDao, LocalStrategy, JwtStrategy]

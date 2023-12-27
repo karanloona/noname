@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, Req, UnauthorizedException, UseGuards } from "@nestjs/common";
 import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 import { API_BEARER_AUTH_NAME, JwtAuthGaurd } from "src/gaurds/jwt-auth.gaurd";
-import { CreateCompanyDTO, UpdateCompanyDTO } from "./company.dto";
+import { CreateCompanyDTO, DeleteCompanyDTO, UpdateCompanyDTO } from "./company.dto";
 import { CompanyService } from "./company.service";
 import { CheckUser } from "src/auth/auth.dto";
 import { Request } from 'express';
@@ -41,11 +41,11 @@ export class CompanyController {
     }
     
     @Delete(':id')
-    async deleteCompanyById(@Param('id') id:string, @Req() req: Request){
+    async deleteCompanyById(@Param('id') id:string,@Body() dto: DeleteCompanyDTO, @Req() req: Request){
         if(req['user'].userType !== 'superadmin'){
             throw new UnauthorizedException();
         }
-        return await this.companySerivce.deleteCompanyById(id);
+        return await this.companySerivce.deleteCompanyById(id, dto.userId);
     }
 
     @Patch(':id')
@@ -55,6 +55,7 @@ export class CompanyController {
         }
         return await this.companySerivce.updateCompanyById(id, dto);
     }
+
 
     @Post('checkUser')
     @UseGuards(JwtAuthGaurd)

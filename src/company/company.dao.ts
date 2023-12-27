@@ -4,10 +4,14 @@ import { Company } from "./company.schema";
 import { Model } from "mongoose";
 import { CreateCompanyDTO, UpdateCompanyDTO } from "./company.dto";
 import { ObjectId } from "mongodb";
+import { Users } from "src/auth/users.schema";
 
 @Injectable()
 export class CompanyDao {
-    constructor(@InjectModel('Company') private companyModel: Model<Company>) {}
+    constructor(
+      @InjectModel('Company') private companyModel: Model<Company>,
+      @InjectModel('User') private usersModel: Model<Users>
+    ) {}
 
     async createCompany(dto:CreateCompanyDTO) {
         const createCompany:Company = {
@@ -57,8 +61,9 @@ export class CompanyDao {
       ]).exec();
     }
 
-    async deleteCompanyById(companyId:ObjectId){
-        return await this.companyModel.deleteOne({ _id: companyId });
+    async deleteCompanyById(companyId:ObjectId, userId: ObjectId){
+      await this.usersModel.deleteOne({ _id: userId });
+      return await this.companyModel.deleteOne({ _id: companyId });
     }
 
     async updateCompanyById(companyId:ObjectId, dto:UpdateCompanyDTO){

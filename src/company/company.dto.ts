@@ -31,3 +31,8 @@ export class UpdateCompanyDTO {
     @ApiProperty({ example: 'toronto', required: false })
     city: string;
 }
+
+export class DeleteCompanyDTO {
+    @ApiProperty({ example: '654279b1b83f726f518ee9b4' })
+    userId: string;
+}
