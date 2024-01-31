@@ -15,6 +15,10 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
+  afterEach(async () => {
+    await app.close(); // Close the NestJS application after each test
+  });
+
   it('/ (GET)', () => {
     return request(app.getHttpServer())
       .get('/')

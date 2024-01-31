@@ -3,11 +3,11 @@ import { CategoryController } from "./category.controller";
 import { CategoryService } from "./category.service";
 import { MongooseModule } from "@nestjs/mongoose";
 import { CategorySchema } from "./category.schema";
-import { JwtStrategy } from "src/strategy/jwt.strategy";
-import { LocalStrategy } from "src/strategy/local.strategy";
-import { DatabaseModule } from "src/database/database.module";
-import { JwtClassModule } from "src/database/jwt.module";
-import { AuthModule } from "src/auth/auth.module";
+import { JwtStrategy } from "../strategy/jwt.strategy";
+import { LocalStrategy } from "../strategy/local.strategy";
+import { DatabaseModule } from "../database/database.module";
+import { JwtClassModule } from "../database/jwt.module";
+import { AuthModule } from "../auth/auth.module";
 import { CategoryDao } from "./category.dao";
 
 @Module({

@@ -1,7 +1,7 @@
 import { ExecutionContext, Injectable, UnauthorizedException } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
 import { Observable } from "rxjs";
-import { secret } from "src/constants/common.constant";
+import { secret } from "../constants/common.constant";
 
 
 export const API_BEARER_AUTH_NAME = 'JWT-Auth';

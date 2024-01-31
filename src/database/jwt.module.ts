@@ -1,7 +1,7 @@
 import { Module } from "@nestjs/common";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { JwtModule } from "@nestjs/jwt";
-import { secret } from "src/constants/common.constant";
+import { secret } from "../constants/common.constant";
 
 @Module({
     imports: [

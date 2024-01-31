@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { CompanyDao } from "./company.dao";
 import { CreateCompanyDTO, UpdateCompanyDTO } from "./company.dto";
-import { AuthDao } from "src/auth/auth.dao";
+import { AuthDao } from "../auth/auth.dao";
 import { ObjectId } from "mongodb";
 
 @Injectable()

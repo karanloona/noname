@@ -1,9 +1,9 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, Req, UnauthorizedException, UseGuards } from "@nestjs/common";
 import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
-import { API_BEARER_AUTH_NAME, JwtAuthGaurd } from "src/gaurds/jwt-auth.gaurd";
+import { API_BEARER_AUTH_NAME, JwtAuthGaurd } from "../gaurds/jwt-auth.gaurd";
 import { CreateCompanyDTO, DeleteCompanyDTO, UpdateCompanyDTO } from "./company.dto";
 import { CompanyService } from "./company.service";
-import { CheckUser } from "src/auth/auth.dto";
+import { CheckUser } from "../auth/auth.dto";
 import { Request } from 'express';
 
 @ApiTags('company')

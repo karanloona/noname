@@ -8,7 +8,7 @@ import { AssumeRoleCommand, STSClient } from "@aws-sdk/client-sts";
 import { GetObjectCommand, PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import { v4 as uuidv4 } from 'uuid';
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
-import { AWS_ACCESS_KEY_ID, AWS_REGION, AWS_S3_BUCKET, AWS_S3_ROLE, AWS_SECRET_ACCESS_KEY } from "src/constants/common.constant";
+import { AWS_ACCESS_KEY_ID, AWS_REGION, AWS_S3_BUCKET, AWS_S3_ROLE, AWS_SECRET_ACCESS_KEY } from "../constants/common.constant";
 import { Contact } from "./contact.schema";
 
 

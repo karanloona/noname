@@ -1,9 +1,9 @@
 import { Body, Controller, Get, Post, Req, UseGuards } from "@nestjs/common";
 import { AuthService } from "./auth.service";
 import { CheckUser, CreateUserDTO, LoginDTO, PasswordDTO } from "./auth.dto";
-import { LocalAuthGaurd } from "src/gaurds/local-auth.gaurd";
+import { LocalAuthGaurd } from "../gaurds/local-auth.gaurd";
 import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
-import { API_BEARER_AUTH_NAME, JwtAuthGaurd } from "src/gaurds/jwt-auth.gaurd";
+import { API_BEARER_AUTH_NAME, JwtAuthGaurd } from "../gaurds/jwt-auth.gaurd";
 import { Request } from 'express';
 
 @Controller('login')

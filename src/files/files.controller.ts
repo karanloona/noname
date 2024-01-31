@@ -2,7 +2,7 @@ import { Body, Controller, Delete, Get, Param, Post, Req, UnauthorizedException,
 import { CreateFolderDTO, UpdateFolderDTO, contactDTO, deleteFileFromFolderDTO, fileRequestDTO, sendMailDTO } from "./files.dto";
 import { FilesService } from "./files.service";
 import { ApiBearerAuth, ApiBody, ApiConsumes, ApiTags } from "@nestjs/swagger";
-import { API_BEARER_AUTH_NAME, JwtAuthGaurd } from "src/gaurds/jwt-auth.gaurd";
+import { API_BEARER_AUTH_NAME, JwtAuthGaurd } from "../gaurds/jwt-auth.gaurd";
 import { FileFieldsInterceptor, FileInterceptor } from "@nestjs/platform-express";
 import { Request } from 'express';
 
